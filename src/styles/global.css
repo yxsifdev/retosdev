@@ -1,1 +1,8 @@
-@import "tailwindcss";
+@import url('./inter.css');
+@import url('./fonts.css');
+@import 'tailwindcss';
+
+@theme {
+  --text-md: 0.9375rem; /* 15px (15/16) */
+  --text-md--line-height: calc(1.5 / 0.9375); /* ≈ 1.6 */
+}

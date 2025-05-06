@@ -1,0 +1,78 @@
+@import 'tailwindcss';
+
+.article-content h1 {
+  @apply mt-7 mb-2 text-3xl font-bold text-slate-400;
+}
+.article-content h2 {
+  @apply mt-7 mb-2 text-2xl font-bold text-slate-400;
+}
+.article-content h3 {
+  @apply mt-7 mb-2 text-xl font-bold text-slate-400;
+}
+.article-content h4 {
+  @apply mt-7 mb-2 text-lg font-bold text-slate-400;
+}
+
+.article-content p {
+  @apply mb-4 text-sm text-slate-500 lg:text-base;
+}
+
+.article-content p strong {
+  @apply text-slate-400;
+}
+
+.article-content hr {
+  @apply border-slate-800;
+}
+
+.article-content ul {
+  @apply my-4 list-inside list-disc;
+}
+
+.article-content ol {
+  @apply list-inside list-decimal;
+}
+
+.article-content li {
+  @apply mb-2 text-sm text-slate-400 lg:text-base;
+}
+
+.article-content a {
+  @apply underline;
+}
+
+.article-content img {
+  @apply mb-4;
+}
+
+.article-content pre {
+  @apply mb-4 rounded-xl p-2 text-xs lg:text-sm;
+}
+
+.article-content code {
+  font-family: 'CascadiaMonoPL', monospace;
+}
+
+.article-content hr {
+  @apply my-8;
+}
+
+.article-content table {
+  @apply mb-4 w-full;
+}
+
+.article-content th {
+  @apply bg-slate-800/30 p-2 text-left text-sm text-slate-500;
+}
+
+.article-content td {
+  @apply bg-slate-800/60 p-2 text-sm text-slate-400;
+}
+
+.article-content iframe {
+  @apply mb-4;
+}
+
+.article-content blockquote {
+  @apply mb-4;
+}

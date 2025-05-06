@@ -1,0 +1,23 @@
+---
+import MainLayout from '@/layouts/MainLayout.astro';
+import Section from '@/components/Section.astro';
+import ProfileCard from '@/sections/profile/ProfileCard.astro';
+import { getSession } from 'auth-astro/server';
+
+const session = await getSession(Astro.request);
+---
+
+<MainLayout title="retosdev">
+  <Section>
+    <ProfileCard />
+  </Section>
+</MainLayout>
+
+<script>
+  import { $ } from '@/lib/dom-selector';
+  const { signOut } = await import('auth-astro/client');
+
+  const $logout = $('#logout');
+
+  if ($logout) $logout.onclick = () => signOut();
+</script>

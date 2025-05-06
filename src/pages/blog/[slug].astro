@@ -1,0 +1,19 @@
+---
+import MarkdownPostLayout from '@/layouts/MarkdownPostLayout.astro';
+import { getEntry, render } from 'astro:content';
+
+export const prerender = false;
+
+const { slug } = Astro.params;
+
+const post = await getEntry('blog', slug?.toString() || '');
+
+if (!post) {
+  return new Response(null, { status: 404 });
+}
+const { Content } = await render(post);
+---
+
+<MarkdownPostLayout frontmatter={post.data}>
+  <Content />
+</MarkdownPostLayout>

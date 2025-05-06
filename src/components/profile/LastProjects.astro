@@ -1,0 +1,75 @@
+---
+import Flame from '../icons/Flame.astro';
+import Check from '../icons/Check.astro';
+import Brain from '../icons/Brain.astro';
+
+interface Props {
+  meta: {
+    streak: number;
+    xp: number;
+    challengesCompleted: number;
+  };
+}
+
+const { meta } = Astro.props;
+---
+
+<div
+  class="col-span-1 overflow-x-hidden rounded-xl bg-slate-800/30 p-5 outline-2 outline-offset-2 outline-slate-800 sm:col-span-2 lg:col-span-3"
+>
+  <ul class="grid h-full grid-cols-1 grid-rows-1 gap-4 lg:grid-cols-4 lg:grid-rows-2">
+    <li class="hidden lg:block">
+      <div
+        class="h-full rounded-lg bg-slate-800/30 p-4 outline-2 outline-offset-2 outline-slate-800"
+      >
+        <p>Hola mundo</p>
+      </div>
+    </li>
+    <li class="hidden lg:block">
+      <div
+        class="h-full rounded-lg bg-slate-800/30 p-4 outline-2 outline-offset-2 outline-slate-800"
+      >
+      </div>
+    </li>
+    <li class="hidden lg:block">
+      <div
+        class="h-full rounded-lg bg-slate-800/30 p-4 outline-2 outline-offset-2 outline-slate-800"
+      >
+      </div>
+    </li>
+    <li class="hidden lg:block">
+      <div
+        class="h-full rounded-lg bg-slate-800/30 p-4 outline-2 outline-offset-2 outline-slate-800"
+      >
+      </div>
+    </li>
+    {
+      meta && (
+        <li class="lg:col-span-4">
+          <div class="grid h-full grid-cols-1 gap-y-4 lg:grid-cols-3 lg:place-content-center lg:gap-0">
+            <div class="flex flex-col items-center text-center">
+              <p class="text-lg font-medium text-slate-500">Días de Racha</p>
+              <span class="inline-flex items-center text-4xl font-bold text-slate-300">
+                <Flame class="mr-1 size-8 text-orange-500" /> {meta.streak}
+              </span>
+            </div>
+            <hr class="border-slate-800 lg:hidden" />
+            <div class="flex flex-col items-center text-center">
+              <p class="text-lg font-medium text-slate-500">Retos completados</p>
+              <span class="inline-flex items-center text-4xl font-bold text-slate-300">
+                <Check class="mr-1 size-8 text-emerald-500" /> {meta.challengesCompleted}
+              </span>
+            </div>
+            <hr class="border-slate-800 lg:hidden" />
+            <div class="flex flex-col items-center text-center">
+              <p class="text-lg font-medium text-slate-500">Total de XP</p>
+              <span class="inline-flex items-center text-4xl font-bold text-slate-300">
+                <Brain class="mr-1 size-8 text-sky-500" /> {meta.challengesCompleted}
+              </span>
+            </div>
+          </div>
+        </li>
+      )
+    }
+  </ul>
+</div>

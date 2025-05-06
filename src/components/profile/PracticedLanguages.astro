@@ -1,0 +1,86 @@
+---
+import Css from '../icons/lang/Css.astro';
+import Html from '../icons/lang/Html.astro';
+import JavaScript from '../icons/lang/JavaScript.astro';
+import TypeScript from '../icons/lang/TypeScript.astro';
+
+interface Props {
+  usedLanguages: string[];
+}
+
+const { usedLanguages } = Astro.props;
+
+// Configuración de colores e iconos para cada lenguaje
+const languageConfig = {
+  Html: {
+    icon: Html,
+    bgActive: 'bg-orange-500/30',
+    outline: 'outline-orange-500',
+    textColor: 'text-orange-500',
+    text: 'HTML',
+  },
+  Css: {
+    icon: Css,
+    bgActive: 'bg-purple-500/30',
+    outline: 'outline-purple-500',
+    textColor: 'text-purple-500',
+    text: 'CSS',
+  },
+  JavaScript: {
+    icon: JavaScript,
+    bgActive: 'bg-yellow-500/30',
+    outline: 'outline-yellow-500',
+    textColor: 'text-yellow-500',
+    text: 'JavaScript',
+  },
+  TypeScript: {
+    icon: TypeScript,
+    bgActive: 'bg-sky-500/30',
+    outline: 'outline-sky-500',
+    textColor: 'text-sky-500',
+    text: 'TypeScript',
+  },
+};
+
+// Clases para elementos inactivos
+const inactiveClasses = {
+  bg: 'bg-slate-800/60',
+  outline: 'outline-slate-600',
+  text: 'text-slate-500',
+};
+
+const allLanguages = Object.keys(languageConfig);
+---
+
+<div class="col-span-1 grid sm:col-span-4 lg:col-span-4">
+  <ul
+    class="grid grid-cols-1 grid-rows-4 gap-4 sm:grid-cols-3 sm:grid-rows-2 md:grid-cols-4 md:grid-rows-1"
+  >
+    {
+      allLanguages.map(lang => {
+        const isUsed = usedLanguages.includes(lang);
+        const config = languageConfig[lang as keyof typeof languageConfig];
+
+        // Elegir las clases correctas según si está activo o no
+        const bgClass = isUsed ? config.bgActive : inactiveClasses.bg;
+        const outlineClass = isUsed ? config.outline : inactiveClasses.outline;
+        const textClass = isUsed ? config.textColor : inactiveClasses.text;
+
+        return (
+          <li
+            class={`group cursor-pointer rounded-xl ${bgClass} p-3 outline-2 outline-offset-2 ${outlineClass} ${!isUsed ? 'opacity-50' : ''}`}
+          >
+            <div class="relative flex flex-col items-center">
+              <config.icon class="size-10 duration-300 group-hover:opacity-0" />
+              <span
+                class={`absolute inset-0 flex items-center justify-center text-base font-medium ${textClass} opacity-0 duration-300 group-hover:opacity-100`}
+              >
+                {config.text}
+              </span>
+            </div>
+          </li>
+        );
+      })
+    }
+  </ul>
+</div>
