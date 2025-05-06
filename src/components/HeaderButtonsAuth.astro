@@ -1,0 +1,40 @@
+---
+import { getSession } from 'auth-astro/server';
+import ProfileAction from './ProfileAction.astro';
+import School from './icons/School.astro';
+import Github from './icons/Github.astro';
+const session = await getSession(Astro.request);
+---
+
+<div class="flex items-center gap-x-5">
+  {
+    session ? (
+      <>
+        <ProfileAction />
+        <a
+          href="/learn"
+          class="flex items-center justify-center rounded-xl bg-sky-600 px-4 py-2 font-medium text-white transition-transform hover:scale-105"
+        >
+          <School class="mr-2 size-6" />
+          <span>Aprender</span>
+        </a>
+      </>
+    ) : (
+      <button
+        id="login"
+        class="flex cursor-pointer items-center justify-center rounded-xl bg-sky-600 px-4 py-2 font-medium text-white transition-transform hover:scale-105"
+      >
+        <Github class="mr-2 size-6" />
+        <span>Iniciar sesión</span>
+      </button>
+    )
+  }
+</div>
+
+<script>
+  import { $ } from '@/lib/dom-selector';
+  const { signIn } = await import('auth-astro/client');
+
+  const $login = $('#login');
+  if ($login) $login.onclick = () => signIn('github');
+</script>

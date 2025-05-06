@@ -1,0 +1,24 @@
+---
+import imgBotWelcome from '@/assets/static/bot.webp';
+import { getSession } from 'auth-astro/server';
+const session = await getSession(Astro.request);
+---
+
+<div class="flex items-center gap-x-5">
+  <img src={imgBotWelcome.src} alt="bot-welcome" class="size-12" />
+  <div class="relative">
+    <span
+      class="absolute top-1/2 left-[-10px] h-0 w-0 -translate-y-1/2 border-y-8 border-r-8 border-y-transparent border-r-slate-800"
+    >
+    </span>
+    <p
+      class="rounded-xl border border-slate-800 bg-slate-800/60 px-4 py-2 text-sm font-medium text-slate-300"
+    >
+      {
+        session
+          ? `¡Hola @${session.user?.name}! ¡Qué alegría verte de nuevo!`
+          : '¡Bienvenido a retosdev ¡Qué alegría verte por aquí!'
+      }
+    </p>
+  </div>
+</div>

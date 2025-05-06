@@ -1,0 +1,22 @@
+---
+import MainLayout from '@/layouts/MainLayout.astro';
+import { getSession } from 'auth-astro/server';
+const session = await getSession(Astro.request);
+---
+
+<MainLayout title="retosdev">
+  <div>
+    <h1>Settings</h1>
+    {session ? <p>Welcome {session.user?.name}</p> : <p>Not logged in</p>}
+  </div>
+  <button id="logout" class="rounded-lg bg-red-500 px-4 py-2">Cerrar ssión</button>
+</MainLayout>
+
+<script>
+  import { $ } from '@/lib/dom-selector';
+  const { signOut } = await import('auth-astro/client');
+
+  const $logout = $('#logout');
+
+  if ($logout) $logout.onclick = () => signOut();
+</script>

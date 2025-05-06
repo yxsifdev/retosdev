@@ -1,0 +1,96 @@
+---
+import { getSession } from 'auth-astro/server';
+const session = await getSession(Astro.request);
+---
+
+<div class="relative">
+  <button id="profile-active" transition:persist>
+    {
+      session && (
+        <img
+          src={session.user?.image}
+          alt={`${session.user?.name}-profile`}
+          class="size-10 cursor-pointer rounded-full border-2 border-slate-800 transition-colors active:border-sky-600"
+        />
+      )
+    }
+  </button>
+  <div
+    transition:persist
+    id="profile-dropdown"
+    class="absolute top-12 right-0 hidden rounded-xl border-2 border-slate-800 bg-slate-900 p-2 transition-opacity"
+  >
+    <nav>
+      <ul>
+        <li>
+          <a
+            href="/profile"
+            class="flex rounded-lg border border-transparent p-2 text-sm text-slate-400 hover:border-slate-800 hover:bg-slate-800/30 hover:text-slate-300"
+          >
+            Perfil
+          </a>
+        </li>
+        <li>
+          <a
+            href="/settings"
+            class="flex rounded-lg border border-transparent p-2 text-sm text-slate-400 hover:border-slate-800 hover:bg-slate-800/30 hover:text-slate-300"
+          >
+            Configuración
+          </a>
+        </li>
+        <li>
+          <a
+            href="http://discord.gg"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex rounded-lg border border-transparent p-2 text-sm text-slate-400 hover:border-slate-800 hover:bg-slate-800/30 hover:text-slate-300"
+          >
+            Comunidad
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<script>
+  import { $ } from '@/lib/dom-selector';
+
+  const $profileDropdown = $('#profile-dropdown');
+  const $profileActive = $('#profile-active');
+
+  if ($profileActive && $profileDropdown) {
+    $profileActive.onclick = () => {
+      const isHidden = $profileDropdown.classList.contains('hidden');
+
+      if (isHidden) {
+        $profileDropdown.classList.remove('hidden');
+        $profileDropdown.classList.add('opacity-0', 'transition-opacity', 'duration-200');
+
+        requestAnimationFrame(() => {
+          $profileDropdown.classList.remove('opacity-0');
+          $profileDropdown.classList.add('opacity-100');
+        });
+      } else {
+        $profileDropdown.classList.remove('opacity-100');
+        $profileDropdown.classList.add('opacity-0');
+        setTimeout(() => {
+          $profileDropdown.classList.add('hidden');
+        }, 200);
+      }
+    };
+
+    document.addEventListener('click', e => {
+      const target: any = e.target;
+
+      if (!$profileActive.contains(target)) {
+        $profileDropdown.classList.remove('opacity-100');
+        $profileDropdown.classList.add('opacity-0');
+
+        setTimeout(() => {
+          $profileDropdown.classList.add('hidden');
+        }, 200);
+      }
+    });
+  }
+</script>

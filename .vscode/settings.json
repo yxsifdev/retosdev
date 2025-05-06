@@ -1,0 +1,28 @@
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "prettier.requireConfig": false,
+  "prettier.enable": true,
+  "prettier.useEditorConfig": false,
+  "prettier.documentSelectors": ["src/**/*.{js,ts,jsx,tsx,astro,json,css,scss,html,md}"],
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[astro]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "eslint.workingDirectories": [
+    {
+      "mode": "auto"
+    }
+  ],
+  "files.associations": {
+    "src/**/*.ts": "typescript",
+    "src/**/*.js": "javascript",
+    "src/**/*.astro": "astro"
+  },
+  "cSpell.words": ["retosdev"]
+}

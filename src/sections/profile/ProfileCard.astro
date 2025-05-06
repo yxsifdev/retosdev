@@ -1,0 +1,60 @@
+---
+import PracticedLanguages from '@/components/profile/PracticedLanguages.astro';
+import LastProjects from '@/components/profile/LastProjects.astro';
+import GitHubIcon from '@/components/icons/Github.astro';
+import { getSession } from 'auth-astro/server';
+import User from '@/schemas/user';
+
+const session = await getSession(Astro.request);
+
+if (!session) return null;
+
+const findUser = await User.findOne({ name: session.user?.name });
+if (!findUser) return null;
+---
+
+{
+  session && (
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-4">
+      <div class="col-span-1 overflow-x-hidden rounded-xl bg-slate-800/30 p-5 outline-2 outline-offset-2 outline-slate-800 sm:col-span-2 lg:col-span-1">
+        <div class="mb-5">
+          <div class="flex items-start justify-between">
+            <img src={session.user?.image} alt={session.user?.name} class="size-32 rounded-lg" />
+            <a
+              href={`http://github.com/${session.user?.name}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class={`inline-flex items-center rounded-lg border border-gray-500/60 bg-gray-500/30 px-2 py-1 text-xs font-medium text-gray-400`}
+            >
+              <GitHubIcon class="mr-1 size-4" />
+              GitHub
+            </a>
+          </div>
+          <div class="mt-2">
+            <p class="text-lg font-bold text-slate-300">{session.user?.name}</p>
+            <p class="text-sm font-medium text-slate-500">@{session.user?.name}</p>
+          </div>
+        </div>
+        <div class="space-y-5">
+          {findUser && (
+            <div class="flex items-center gap-x-4 text-sm">
+              <p class="flex gap-x-1 font-bold text-slate-300">
+                {findUser.follows.length}
+                <span class="font-medium text-slate-500">Siguiendo</span>
+              </p>
+              <p class="flex gap-x-1 font-bold text-slate-300">
+                {findUser.followers.length}
+                <span class="font-medium text-slate-500">Seguidores</span>
+              </p>
+            </div>
+          )}
+          <button class="w-full cursor-pointer rounded-lg bg-emerald-500/30 py-2 text-sm font-medium text-emerald-500/60 outline-2 outline-offset-2 outline-emerald-500/60 transition-colors hover:bg-emerald-500/60 hover:text-emerald-500 hover:outline-emerald-500">
+            Editar perfil
+          </button>
+        </div>
+      </div>
+      <LastProjects meta={findUser?.meta} />
+      <PracticedLanguages usedLanguages={findUser?.usedLanguages} />
+    </div>
+  )
+}
