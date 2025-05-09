@@ -1,0 +1,20 @@
+---
+import LearnLayout from '@/layouts/LearnLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export const prerender = false;
+
+const { slug } = Astro.params;
+
+const allLearn = await getCollection('learn');
+const post = allLearn.find(entry => entry.id === `js/${slug}`);
+
+if (!post) {
+  return new Response(null, { status: 404 });
+}
+const { Content } = await render(post);
+---
+
+<LearnLayout frontmatter={post.data}>
+  <Content />
+</LearnLayout>

@@ -12,6 +12,18 @@ const blogCollection = defineCollection({
   }),
 });
 
+const learnCollection = defineCollection({
+  loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './src/content/learn' }),
+  schema: z.object({
+    title: z.string(),
+    topic: z.string(),
+    description: z.string(),
+    publishDate: z.date(),
+    tags: z.array(z.string()),
+  }),
+});
+
 export const collections = {
   blog: blogCollection,
+  learn: learnCollection,
 };

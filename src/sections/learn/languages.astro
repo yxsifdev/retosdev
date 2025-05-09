@@ -1,0 +1,172 @@
+---
+import File from '@/components/icons/File.astro';
+import Grid from '@/components/icons/Grid.astro';
+import CodeJson from '@/components/icons/CodeJson.astro';
+import Section from '@/components/Section.astro';
+import Arrow from '@/components/icons/Arrow.astro';
+
+interface Props {
+  count: {
+    html: number;
+    css: number;
+    js: number;
+    ts: number;
+  };
+}
+
+const { count } = Astro.props;
+---
+
+<Section>
+  <ul class="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2">
+    <li>
+      <article
+        class="h-full cursor-default rounded-xl border-2 border-orange-500/30 p-5 transition-colors hover:border-orange-500"
+      >
+        <div class="flex h-full flex-col justify-between space-y-4">
+          <div class="flex items-center gap-x-4">
+            <span class="inline-flex rounded-lg bg-orange-500/10 p-2">
+              <File class="size-8 text-orange-500" />
+            </span>
+            <div class="flex flex-col items-start space-y-1">
+              <p class="text-xl font-bold">HTML</p>
+              <span class="rounded-full border border-slate-800 px-2 py-0.5 text-xs"
+                >{count.html} lecciones</span
+              >
+            </div>
+          </div>
+          <p class="font-medium text-slate-500">
+            Estructura básica de un documento HTML, etiquetas comunes, formularios y validación
+            básica.
+          </p>
+          <ul class="list-inside list-disc text-slate-300">
+            <li>Estructura básica de un documento HTML</li>
+            <li>Etiquetas comunes (div, p, a, img, etc.)</li>
+            <li>Formularios y validación básica</li>
+          </ul>
+          <div class="flex items-center justify-end">
+            <a
+              href="/learn/html/html"
+              class="inline-flex min-h-[50px] items-center justify-center gap-x-2 rounded-2xl border border-slate-800 bg-slate-800/30 px-4 text-sm font-medium text-white transition-colors duration-300 hover:bg-slate-800"
+            >
+              Explorar
+              <Arrow class="size-5" />
+            </a>
+          </div>
+        </div>
+      </article>
+    </li>
+    <li>
+      <article
+        class="h-full cursor-default rounded-xl border-2 border-purple-500/30 p-5 transition-colors hover:border-purple-500"
+      >
+        <div class="flex h-full flex-col justify-between space-y-4">
+          <div class="flex items-center gap-x-4">
+            <span class="inline-flex rounded-lg bg-purple-500/10 p-2">
+              <Grid class="size-8 text-purple-500" />
+            </span>
+            <div class="flex flex-col items-start space-y-1">
+              <p class="text-xl font-bold">CSS</p>
+              <span class="rounded-full border border-slate-800 px-2 py-0.5 text-xs"
+                >{count.css} lecciones</span
+              >
+            </div>
+          </div>
+          <p class="font-medium text-slate-500">
+            Selectores, propiedades, box model, layouts con Flexbox y Grid, animaciones y
+            transiciones.
+          </p>
+          <ul class="list-inside list-disc text-slate-300">
+            <li>Selectores, propiedades y valores básicos</li>
+            <li>Box model (márgenes, relleno, borde, contenido)</li>
+            <li>Layouts: Flexbox, Grid</li>
+            <li>Estilización de formularios y botones</li>
+            <li>Animaciones básicas y transiciones</li>
+          </ul>
+          <div class="flex items-center justify-end">
+            <a
+              href="/learn/css/css"
+              class="inline-flex min-h-[50px] items-center justify-center gap-x-2 rounded-2xl border border-slate-800 bg-slate-800/30 px-4 text-sm font-medium text-white transition-colors duration-300 hover:bg-slate-800"
+            >
+              Explorar
+              <Arrow class="size-5" />
+            </a>
+          </div>
+        </div>
+      </article>
+    </li>
+    <li>
+      <article
+        class="h-full cursor-default rounded-xl border-2 border-yellow-500/30 p-5 transition-colors hover:border-yellow-500"
+      >
+        <div class="flex h-full flex-col justify-between space-y-4">
+          <div class="flex items-center gap-x-4">
+            <span class="inline-flex rounded-lg bg-yellow-500/10 p-2">
+              <File class="size-8 text-yellow-500" />
+            </span>
+            <div class="flex flex-col items-start space-y-1">
+              <p class="text-xl font-bold">JavaScript</p>
+              <span class="rounded-full border border-slate-800 px-2 py-0.5 text-xs"
+                >{count.js} lecciones</span
+              >
+            </div>
+          </div>
+          <p class="font-medium text-slate-500">
+            Sintaxis básica, manipulación del DOM, eventos, bucles y condicionales.
+          </p>
+          <ul class="list-inside list-disc text-slate-300">
+            <li>Sintaxis básica: variables, funciones, operadores</li>
+            <li>Manipulación del DOM</li>
+            <li>Eventos en JavaScript (click, submit, etc.)</li>
+            <li>Bucles y condicionales</li>
+          </ul>
+          <div class="flex items-center justify-end">
+            <a
+              href="/learn/js/js"
+              class="inline-flex min-h-[50px] items-center justify-center gap-x-2 rounded-2xl border border-slate-800 bg-slate-800/30 px-4 text-sm font-medium text-white transition-colors duration-300 hover:bg-slate-800"
+            >
+              Explorar
+              <Arrow class="size-5" />
+            </a>
+          </div>
+        </div>
+      </article>
+    </li>
+    <li>
+      <article
+        class="h-full cursor-default rounded-xl border-2 border-blue-500/30 p-5 transition-colors hover:border-blue-500"
+      >
+        <div class="flex h-full flex-col justify-between space-y-4">
+          <div class="flex items-center gap-x-4">
+            <span class="inline-flex rounded-lg bg-blue-500/10 p-2">
+              <CodeJson class="size-8 text-blue-500" />
+            </span>
+            <div class="flex flex-col items-start space-y-1">
+              <p class="text-xl font-bold">TypeScript</p>
+              <span class="rounded-full border border-slate-800 px-2 py-0.5 text-xs"
+                >{count.ts} lecciones</span
+              >
+            </div>
+          </div>
+          <p class="font-medium text-slate-500">
+            Tipado básico, funciones con tipos de datos, interfaces y clases.
+          </p>
+          <ul class="list-inside list-disc text-slate-300">
+            <li>Tipado básico</li>
+            <li>Funciones con tipos de datos</li>
+            <li>Interfaces y clases</li>
+          </ul>
+          <div class="flex items-center justify-end">
+            <a
+              href="/learn/ts/ts"
+              class="inline-flex min-h-[50px] items-center justify-center gap-x-2 rounded-2xl border border-slate-800 bg-slate-800/30 px-4 text-sm font-medium text-white transition-colors duration-300 hover:bg-slate-800"
+            >
+              Explorar
+              <Arrow class="size-5" />
+            </a>
+          </div>
+        </div>
+      </article>
+    </li>
+  </ul>
+</Section>

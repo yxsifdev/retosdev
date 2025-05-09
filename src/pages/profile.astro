@@ -2,22 +2,27 @@
 import MainLayout from '@/layouts/MainLayout.astro';
 import Section from '@/components/Section.astro';
 import ProfileCard from '@/sections/profile/ProfileCard.astro';
-import { getSession } from 'auth-astro/server';
+const SITE_URL = import.meta.env.PUBLIC_API_URL || 'http://localhost:4321';
 
-const session = await getSession(Astro.request);
+const response = await fetch(`${SITE_URL}/api/user/profile`, {
+  credentials: 'include',
+  headers: {
+    Cookie: Astro.request.headers.get('Cookie') || '',
+  },
+});
+
+let data = null;
+let error = null;
+
+if (!response.ok) {
+  error = `Error: ${response.status} - ${response.statusText}`;
+} else {
+  data = await response.json();
+}
 ---
 
 <MainLayout title="retosdev">
   <Section>
-    <ProfileCard />
+    {error ? <p class="text-red-500">{error}</p> : <ProfileCard data={data} />}
   </Section>
 </MainLayout>
-
-<script>
-  import { $ } from '@/lib/dom-selector';
-  const { signOut } = await import('auth-astro/client');
-
-  const $logout = $('#logout');
-
-  if ($logout) $logout.onclick = () => signOut();
-</script>
