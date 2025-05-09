@@ -10,7 +10,6 @@ interface Props {
 
 const { usedLanguages } = Astro.props;
 
-// Configuración de colores e iconos para cada lenguaje
 const languageConfig = {
   Html: {
     icon: Html,
@@ -42,7 +41,6 @@ const languageConfig = {
   },
 };
 
-// Clases para elementos inactivos
 const inactiveClasses = {
   bg: 'bg-slate-800/60',
   outline: 'outline-slate-600',
@@ -61,7 +59,6 @@ const allLanguages = Object.keys(languageConfig);
         const isUsed = usedLanguages.includes(lang);
         const config = languageConfig[lang as keyof typeof languageConfig];
 
-        // Elegir las clases correctas según si está activo o no
         const bgClass = isUsed ? config.bgActive : inactiveClasses.bg;
         const outlineClass = isUsed ? config.outline : inactiveClasses.outline;
         const textClass = isUsed ? config.textColor : inactiveClasses.text;

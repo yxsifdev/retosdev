@@ -1,22 +1,40 @@
 ---
+import Section from '@/components/Section.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
-import { getSession } from 'auth-astro/server';
-const session = await getSession(Astro.request);
+import Languages from '@/sections/learn/languages.astro';
+import { getCollection } from 'astro:content';
+interface CategoryCounts {
+  html: number;
+  css: number;
+  js: number;
+  ts: number;
+}
+
+const allLearn = await getCollection('learn');
+
+const counts: CategoryCounts = allLearn.reduce(
+  (acc, entry) => {
+    const category = entry.id.split('/')[0] as keyof CategoryCounts;
+    if (['html', 'css', 'js', 'ts'].includes(category)) {
+      acc[category] = (acc[category] || 0) + 1;
+    }
+    return acc;
+  },
+  { html: 0, css: 0, js: 0, ts: 0 },
+);
 ---
 
 <MainLayout title="retosdev">
-  <div>
-    <h1>retosdev</h1>
-    {session ? <p>Welcome {session.user?.name}</p> : <p>Not logged in</p>}
-  </div>
-  <button id="logout" class="rounded-lg bg-red-500 px-4 py-2">Cerrar ssión</button>
+  <Section>
+    <div class="text-center">
+      <h1 class="mb-2 text-4xl font-bold">
+        Aprende <span class="text-sky-600">Desarrollo Web</span>
+      </h1>
+      <p class="mx-auto max-w-lg text-slate-500">
+        Mejora tus habilidades en el desarrollo web mediante las rutas que te compartimos aquí en
+        retosdev.
+      </p>
+    </div>
+  </Section>
+  <Languages count={counts} />
 </MainLayout>
-
-<script>
-  import { $ } from '@/lib/dom-selector';
-  const { signOut } = await import('auth-astro/client');
-
-  const $logout = $('#logout');
-
-  if ($logout) $logout.onclick = () => signOut();
-</script>

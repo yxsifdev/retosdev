@@ -2,8 +2,6 @@
 import Section from '@/components/Section.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
 import Welcome from '@/sections/home/Welcome.astro';
-import { getSession } from 'auth-astro/server';
-const session = await getSession(Astro.request);
 ---
 
 <MainLayout title="retosdev">
